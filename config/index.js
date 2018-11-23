@@ -14,10 +14,10 @@ const defaultConfig = {
     NODE_ENV: '"development"'
   },
   port: 3001,
-  autoOpenBrowser: true,
+  autoOpenBrowser: false,
   cssSourceMap: false,
   db: {
-    uri: 'mongodb://localhost:27017/mevn-stack'
+    uri: 'mongodb://146.222.94.53:27017/fabric-console'
   }
 };
 

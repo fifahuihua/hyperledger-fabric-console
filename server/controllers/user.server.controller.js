@@ -22,7 +22,7 @@ exports.userCount = function(req, res) {
 };
 
 exports.checkSession = function(req, res) {
-  const sessionValue = CookieUtils.getSessionId(req)
+  const sessionValue = CookieUtils.getSessionId(req);
   if (sessionValue) {
     return res.json({status: 'success', user: {id: 1, name: 'test', status: 'active'}});
   } else {

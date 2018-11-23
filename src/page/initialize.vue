@@ -5,7 +5,7 @@
 				<table class="checking-table">
 					<thead>
 						<tr>
-							<th width="600" align="center">Item</th>
+							<th width="600" align="center">Check Application Item</th>
 							<th width="120" style="text-align: center;">Result</th>
 						</tr>
 					</thead>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import EnvGw from '@/api/env.client.gw';
+
 export default {
   data() {
     return {
@@ -67,14 +69,9 @@ export default {
     startCheck: async function() {
       for (const key in this.checkStatus) {
 				this.checkStatus[key] = 'checking';
-        await this.checkItem(3);
-				this.checkStatus[key] = 'success';
+        const res = await EnvGw.checkAppVersion(key);
+				this.checkStatus[key] = (res.data.result == 'success' ? 'success' : 'fail');
       }
-    },
-    checkItem: function(seconds) {
-      return new Promise((resolve) => {
-        setTimeout(resolve, seconds * 1000);
-      });
     }
   }
 };

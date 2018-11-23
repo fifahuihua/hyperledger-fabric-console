@@ -9,7 +9,7 @@ const config = require('../config')[process.env.NODE_ENV];
 
 exports.init = async function () {
   console.log(`process.env.NODE_ENV: ${process.env.NODE_ENV}, config: ${JSON.stringify(config)}`);
-  let options = _.get(config.db, 'options', {});
+  let options = _.get(config.db, 'options', { useNewUrlParser: true });
   let uri = config.db.uri;
 
   mongoose.connection.on('error', function () {
@@ -23,9 +23,11 @@ exports.init = async function () {
   });
 
   try {
+    mongoose.set('useCreateIndex', true)
+    // mongoose.connect(config.dbUri, { useNewUrlParser: true })
     let dbConn = await mongoose.connect(uri, options);
     let models = FileUtil.getGlobbedPaths('./server/models/*.server.model.js');
-    for( let model of models) {
+    for (let model of models) {
       require(path.resolve(model));
     }
     return dbConn;

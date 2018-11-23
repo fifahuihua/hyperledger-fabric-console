@@ -62,8 +62,8 @@ const startApp = async function() {
   );
 
   var mongoStore = new MongoStore({
-    mongooseConnection: dbConnection,
-    url: 'mongodb://localhost:27017/mevn-stack',
+    // mongooseConnection: dbConnection,
+    url: config.db.uri,
     touchAfter: 24 * 3600, // Updating the session only every 24 hours.
     autoRemove: 'interval',
     autoRemoveInterval: 30 // Removing expired sessions every 30 minutes.
@@ -131,7 +131,11 @@ const startApp = async function() {
   console.log(`> Listening at ${uri}\n`);
 };
 
-startApp();
+try {
+  startApp();
+} catch (error) {
+  console.error(error);
+}
 
 module.exports = {
   ready: readyPromise,
