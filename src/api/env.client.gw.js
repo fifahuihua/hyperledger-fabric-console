@@ -7,6 +7,11 @@ const checkAppVersion = function(appType) {
 	})
 };
 
+const checkAllApp = function() {
+	return true;
+};
+
 export default {
-	checkAppVersion
+	checkAppVersion,
+	checkAllApp
 }

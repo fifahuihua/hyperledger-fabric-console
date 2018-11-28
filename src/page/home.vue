@@ -1,20 +1,17 @@
 <template>
-    <div>
-        <head-top></head-top>
-		<section class="data_section">
-			<header class="section_title">Welcome to use CargoSmart MEVN Framework!</header>
-		</section>
-    </div>
+  <div>
+    <section class="data_section">
+      <header class="section_title">Welcome to Hyperledger Fabric Console!</header>
+    </section>
+  </div>
 </template>
 
 <script>
-import headTop from "../components/headTop";
 export default {
   data() {
     return {};
   },
   components: {
-    headTop
   },
   mounted() {},
   computed: {},
@@ -22,8 +19,7 @@ export default {
 };
 </script>
 
-<style lang="less">
-@import "../style/mixin";
+<style lang="less" scoped>
 .data_section {
   padding: 20px;
   margin-bottom: 40px;
@@ -32,32 +28,5 @@ export default {
     font-size: 30px;
     margin-bottom: 10px;
   }
-  .data_list {
-    text-align: center;
-    font-size: 14px;
-    color: #666;
-    border-radius: 6px;
-    background: #e5e9f2;
-    .data_num {
-      color: #333;
-      font-size: 26px;
-    }
-    .head {
-      border-radius: 6px;
-      font-size: 22px;
-      padding: 4px 0;
-      color: #fff;
-      display: inline-block;
-    }
-  }
-  .today_head {
-    background: #ff9800;
-  }
-  .all_head {
-    background: #20a0ff;
-  }
-}
-.wan {
-  .sc(16px, #333);
 }
 </style>

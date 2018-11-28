@@ -32,7 +32,8 @@
 						</tr>
 						<tr>
 							<td colspan="2" style="text-align: right; padding: 10px;">
-								<el-button type="primary" @click="startCheck">Start Checking</el-button>
+								<el-button v-if="!allChecked" type="primary" @click="startCheck">Start Checking</el-button>
+                <el-button v-if="allChecked" type="warning" @click="goSetupEnv">Start Setup Fabric Network</el-button>
 							</td>
 						</tr>
 					</tbody>
@@ -48,6 +49,7 @@ import EnvGw from '@/api/env.client.gw';
 export default {
   data() {
     return {
+      allChecked: false,
       checkStatus: {
         docker: 'pending',
         composer: 'pending',
@@ -67,11 +69,21 @@ export default {
       }[this.checkStatus[key]];
     },
     startCheck: async function() {
+      let allPassed = true;
       for (const key in this.checkStatus) {
 				this.checkStatus[key] = 'checking';
         const res = await EnvGw.checkAppVersion(key);
-				this.checkStatus[key] = (res.data.result == 'success' ? 'success' : 'fail');
+        this.checkStatus[key] = (res.data.result === 'success' ? 'success' : 'fail');
+        if (res.data.result !== 'success') {
+          allPassed = false;
+        }
       }
+
+      this.allChecked = allPassed;
+      this.$store.commit('checkAllApps', this.allChecked);
+    },
+    goSetupEnv: function() {
+      this.$router.push('/');
     }
   }
 };

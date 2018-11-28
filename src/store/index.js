@@ -1,20 +1,27 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {getAdminInfo, checkSession} from '@/api/user.client.gw'
+import {checkSession} from '@/api/user.client.gw'
 
 Vue.use(Vuex)
 
 const state = {
-	loginUser: null
+	loginUser: null,
+	allAppsChecked: false
 }
 
 const mutations = {
 	userLogin(state, loginUser) {
 		state.loginUser = loginUser;
+	},
+	checkAllApps(state, result) {
+		state.allAppsChecked = result;
 	}
 }
 
 const actions = {
+	async checkAllApps({commit}) {
+		commit('checkAllApps', true);
+	},
 	async checkSession({commit}) {
 		try{
 			const res = await checkSession()

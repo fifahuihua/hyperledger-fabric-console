@@ -17,7 +17,7 @@ const defaultConfig = {
   autoOpenBrowser: false,
   cssSourceMap: false,
   db: {
-    uri: 'mongodb://146.222.94.53:27017/fabric-console'
+    uri: 'mongodb://10.222.47.146:27017/fabric-console'
   }
 };
 

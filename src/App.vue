@@ -1,33 +1,39 @@
 <template>
-    <div id="app" class="fillcontain">
-		    <router-view></router-view>
-    </div>
+  <div id="app" class="fillcontain">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import { login } from "@/api/user.client.gw";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState } from 'vuex';
 
 export default {
   mounted: async function() {
-    await this.checkSession();
+    await this.checkAllApps();
 
-    if (!this.loginUser || !this.loginUser.id) {
-      this.$router.push("/login");
+    if (!this.allAppsChecked) {
+      this.$router.push('/init');
     }
   },
   computed: {
-    ...mapState(["loginUser"])
+    ...mapState(['allAppsChecked'])
   },
   methods: {
-    ...mapActions(["checkSession"])
+    ...mapActions(['checkAllApps'])
   },
   watch: {
-    loginUser: function(newValue) {
-      if (newValue && newValue.id) {
-        this.$router.push("/");
+    allAppsChecked: function(newValue) {
+      if (newValue) {
+        this.$router.push('/');
       }
     }
   }
 };
 </script>
+
+<style>
+body {
+  margin: 0;
+}
+</style>
+
