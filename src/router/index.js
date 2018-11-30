@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import InitPage from '@/page/initialize';
 import HomePage from '@/page/home';
 import DashboardPage from '@/page/dashboard';
+import QueryPage from '@/page/query';
 
 Vue.use(Router)
 
@@ -17,8 +18,11 @@ const routes = [
 		name: '',
 		children: [{
 			path: '',
-			component: HomePage,
-			meta: []
+			component: HomePage
+		},
+		{
+			path: '/query',
+			component: QueryPage
 		}]
 	}
 ]

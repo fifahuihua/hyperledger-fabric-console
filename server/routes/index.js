@@ -2,6 +2,7 @@
 
 const UserController = require('../controllers/user.server.controller');
 const EnvController = require('../controllers/env.server.controller');
+const FabricController = require('../controllers/fabric.server.controller');
 
 module.exports = function (app) {
   app.route('/api/admin/login').post(UserController.login);
@@ -13,4 +14,5 @@ module.exports = function (app) {
   app.route('/api/user/checkSession').get(UserController.checkSession);
 
   app.route('/api/env/checkVersion/:appType').get(EnvController.checkVersion);
+  app.route('/api/fabric/query').get(FabricController.queryTransaction);
 };
